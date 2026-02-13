@@ -4,9 +4,9 @@
 
 ## 🚀 Features
 
-- 🔤 Replace text in placeholder text boxes using `update_text(text_id, text_value)`
-- 📊 Insert matplotlib figures in place of text boxes using `insert_graph(text_id, matplotlib_figure)`
-- 📋 Insert tables using `insert_table(text_id, data)`
+- 🔤 Replace text in placeholder text boxes using `update(text_id, text_value)`
+- 📊 Insert matplotlib figures in place of text boxes using `insert(text_id, matplotlib_figure)`
+- 📋 Insert tables using `insert(text_id, data)`
 - 🪄 Designed for templating: works with alt-text-based placeholders (e.g. `{{ TITLE }}`, `{{ BODY1 }}`)
 - 📄 Create new presentations from templates with `from_template()`
 - 👥 Share presentations with viewers and contributors
@@ -31,7 +31,7 @@ pip install slidio
 Then, authenticate on Google Slides and build your "recipe":
 
 ```python
-from py_slidio import SlidioClient
+from slidio import SlidioClient
 from google.oauth2 import service_account
 import matplotlib.pyplot as plt
 
@@ -47,12 +47,12 @@ creds = service_account.Credentials.from_service_account_file(
 client = SlidioClient(creds, "your-presentation-id")
 
 # Replace text
-client.text.update_text("TITLE", "Quarterly Results")
+client.text.update("TITLE", "Quarterly Results")
 
 # Insert graph
 fig, ax = plt.subplots()
 ax.plot([1, 2, 3], [4, 6, 5])
-client.graph.insert_graph("BODY1", fig)
+client.graph.insert("BODY1", fig)
 
 # Insert table
 data = [
@@ -60,7 +60,7 @@ data = [
     ["John", "85"],
     ["Jane", "92"]
 ]
-client.table.insert_table("TABLE1", data)
+client.table.insert("TABLE1", data)
 ```
 
 ### Creating from Template
