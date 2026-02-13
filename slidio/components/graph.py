@@ -3,6 +3,7 @@ import tempfile
 import uuid
 
 from ..utils import extract_exact_position, save_figure_to_png, upload_image_to_drive
+import matplotlib.pyplot as plt
 
 
 class GraphComponent:
@@ -40,6 +41,7 @@ class GraphComponent:
         # Save and upload figure
         tmpfile = os.path.join(tempfile.gettempdir(), f"{uuid.uuid4()}.png")
         save_figure_to_png(fig, tmpfile)
+        plt.close(fig)
         image_url = upload_image_to_drive(self.drive_service, tmpfile)
         os.remove(tmpfile)
 
@@ -99,6 +101,7 @@ class GraphComponent:
         # Enregistrer et uploader l'image
         tmpfile = os.path.join(tempfile.gettempdir(), f"{uuid.uuid4()}.png")
         save_figure_to_png(fig, tmpfile)
+        plt.close(fig)
         image_url = upload_image_to_drive(self.drive_service, tmpfile)
         os.remove(tmpfile)
 
